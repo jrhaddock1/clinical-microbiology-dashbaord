@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinical Microbiology Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Clinical Microbiology Test Data</h1>
+    <div id="testData" class="mb-4"></div>
+    <h2 class="text-xl font-semibold mb-2">Add New Test Data</h2>
+    <form id="testForm" class="bg-white p-4 rounded shadow-md">
+      <div class="mb-2">
+        <label for="patientId" class="block">Patient ID:</label>
+        <input type="text" id="patientId" name="patientId" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="testType" class="block">Test Type:</label>
+        <input type="text" id="testType" name="testType" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="sampleDate" class="block">Sample Date:</label>
+        <input type="date" id="sampleDate" name="sampleDate" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="result" class="block">Result:</label>
+        <input type="text" id="result" name="result" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="comments" class="block">Comments:</label>
+        <textarea id="comments" name="comments" class="border p-2 w-full"></textarea>
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+    </form>
+    <h2 class="text-xl font-semibold mt-4 mb-2">Positivity Rates</h2>
+    <form id="positivityRateForm" class="bg-white p-4 rounded shadow-md mb-4">
+      <div class="mb-2">
+        <label for="month" class="block">Month:</label>
+        <input type="text" id="month" name="month" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="year" class="block">Year:</label>
+        <input type="number" id="year" name="year" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="influenzaA" class="block">Influenza A:</label>
+        <input type="number" id="influenzaA" name="influenzaA" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="influenzaB" class="block">Influenza B:</label>
+        <input type="number" id="influenzaB" name="influenzaB" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="strepA" class="block">Strep A:</label>
+        <input type="number" id="strepA" name="strepA" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="covid" class="block">COVID:</label>
+        <input type="number" id="covid" name="covid" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireAdenovirusF4041" class="block">Adenovirus F40/41:</label>
+        <input type="number" id="giBiofireAdenovirusF4041" name="giBiofireAdenovirusF4041" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireAstrovirus" class="block">Astrovirus:</label>
+        <input type="number" id="giBiofireAstrovirus" name="giBiofireAstrovirus" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireNorovirusGIGII" class="block">Norovirus GI/GII:</label>
+        <input type="number" id="giBiofireNorovirusGIGII" name="giBiofireNorovirusGIGII" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireRotavirusA" class="block">Rotavirus A:</label>
+        <input type="number" id="giBiofireRotavirusA" name="giBiofireRotavirusA" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireSapovirus" class="block">Sapovirus (I, II, IV, and V):</label>
+        <input type="number" id="giBiofireSapovirus" name="giBiofireSapovirus" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireCampylobacter" class="block">Campylobacter (C. jejuni / C. coli / C. upsaliensis):</label>
+        <input type="number" id="giBiofireCampylobacter" name="giBiofireCampylobacter" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireClostridioidesDifficile" class="block">Clostridioides (Clostridium) difficile (toxin A/B):</label>
+        <input type="number" id="giBiofireClostridioidesDifficile" name="giBiofireClostridioidesDifficile" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofirePlesiomonasShigelloides" class="block">Plesiomonas shigelloides:</label>
+        <input type="number" id="giBiofirePlesiomonasShigelloides" name="giBiofirePlesiomonasShigelloides" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireSalmonella" class="block">Salmonella:</label>
+        <input type="number" id="giBiofireSalmonella" name="giBiofireSalmonella" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireYersiniaEnterocolitica" class="block">Yersinia enterocolitica:</label>
+        <input type="number" id="giBiofireYersiniaEnterocolitica" name="giBiofireYersiniaEnterocolitica" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireVibrio" class="block">Vibrio (V. parahaemolyticus / V. vulnificus / V. cholerae):</label>
+        <input type="number" id="giBiofireVibrio" name="giBiofireVibrio" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireVibrioCholerae" class="block">Vibrio cholerae:</label>
+        <input type="number" id="giBiofireVibrioCholerae" name="giBiofireVibrioCholerae" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireEscherichiaColiShigella" class="block">Escherichia coli/Shigella:</label>
+        <input type="number" id="giBiofireEscherichiaColiShigella" name="giBiofireEscherichiaColiShigella" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireEnteroaggregativeEColi" class="block">Enteroaggregative E. coli (EAEC):</label>
+        <input type="number" id="giBiofireEnteroaggregativeEColi" name="giBiofireEnteroaggregativeEColi" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireEnteropathogenicEColi" class="block">Enteropathogenic E. coli (EPEC):</label>
+        <input type="number" id="giBiofireEnteropathogenicEColi" name="giBiofireEnteropathogenicEColi" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireEnterotoxigenicEColi" class="block">Enterotoxigenic E. coli (ETEC) lt/st:</label>
+        <input type="number" id="giBiofireEnterotoxigenicEColi" name="giBiofireEnterotoxigenicEColi" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireShigaLikeToxinEColi" class="block">Shiga-like toxin-producing E. coli (STEC) stx1/stx2:</label>
+        <input type="number" id="giBiofireShigaLikeToxinEColi" name="giBiofireShigaLikeToxinEColi" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireEColiO157" class="block">E. coli O157:</label>
+        <input type="number" id="giBiofireEColiO157" name="giBiofireEColiO157" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireShigellaEIEC" class="block">Shigella/Enteroinvasive E. coli (EIEC):</label>
+        <input type="number" id="giBiofireShigellaEIEC" name="giBiofireShigellaEIEC" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireCryptosporidium" class="block">Cryptosporidium:</label>
+        <input type="number" id="giBiofireCryptosporidium" name="giBiofireCryptosporidium" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireCyclosporaCayetanensis" class="block">Cyclospora cayetanensis:</label>
+        <input type="number" id="giBiofireCyclosporaCayetanensis" name="giBiofireCyclosporaCayetanensis" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireEntamoebaHistolytica" class="block">Entamoeba histolytica:</label>
+        <input type="number" id="giBiofireEntamoebaHistolytica" name="giBiofireEntamoebaHistolytica" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireGiardiaLamblia" class="block">Giardia lamblia:</label>
+        <input type="number" id="giBiofireGiardiaLamblia" name="giBiofireGiardiaLamblia" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="giBiofireNoneDetected" class="block">None Detected:</label>
+        <input type="number" id="giBiofireNoneDetected" name="giBiofireNoneDetected" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireEscherichiaColiK1" class="block">Escherichia coli K1:</label>
+        <input type="number" id="meningitisBiofireEscherichiaColiK1" name="meningitisBiofireEscherichiaColiK1" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireHaemophilusInfluenzae" class="block">Haemophilus influenzae:</label>
+        <input type="number" id="meningitisBiofireHaemophilusInfluenzae" name="meningitisBiofireHaemophilusInfluenzae" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireListeriaMonocytogenes" class="block">Listeria monocytogenes:</label>
+        <input type="number" id="meningitisBiofireListeriaMonocytogenes" name="meningitisBiofireListeriaMonocytogenes" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireNeisseriaMeningitidis" class="block">Neisseria meningitidis:</label>
+        <input type="number" id="meningitisBiofireNeisseriaMeningitidis" name="meningitisBiofireNeisseriaMeningitidis" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireStreptococcusAgalactiae" class="block">Streptococcus agalactiae:</label>
+        <input type="number" id="meningitisBiofireStreptococcusAgalactiae" name="meningitisBiofireStreptococcusAgalactiae" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireStreptococcusPneumoniae" class="block">Streptococcus pneumoniae:</label>
+        <input type="number" id="meningitisBiofireStreptococcusPneumoniae" name="meningitisBiofireStreptococcusPneumoniae" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireCytomegalovirus" class="block">Cytomegalovirus (CMV):</label>
+        <input type="number" id="meningitisBiofireCytomegalovirus" name="meningitisBiofireCytomegalovirus" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireEnterovirus" class="block">Enterovirus (EV):</label>
+        <input type="number" id="meningitisBiofireEnterovirus" name="meningitisBiofireEnterovirus" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireHerpesSimplexVirus1" class="block">Herpes simplex virus 1 (HSV-1):</label>
+        <input type="number" id="meningitisBiofireHerpesSimplexVirus1" name="meningitisBiofireHerpesSimplexVirus1" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireHerpesSimplexVirus2" class="block">Herpes simplex virus 2 (HSV-2):</label>
+        <input type="number" id="meningitisBiofireHerpesSimplexVirus2" name="meningitisBiofireHerpesSimplexVirus2" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireHumanHerpesvirus6" class="block">Human herpesvirus 6 (HHV-6):</label>
+        <input type="number" id="meningitisBiofireHumanHerpesvirus6" name="meningitisBiofireHumanHerpesvirus6" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireHumanParechovirus" class="block">Human parechovirus (HPeV):</label>
+        <input type="number" id="meningitisBiofireHumanParechovirus" name="meningitisBiofireHumanParechovirus" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireVaricellaZosterVirus" class="block">Varicella zoster virus (VZV):</label>
+        <input type="number" id="meningitisBiofireVaricellaZosterVirus" name="meningitisBiofireVaricellaZosterVirus" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireCryptococcus" class="block">Cryptococcus (C. neoformans/C. gattii):</label>
+        <input type="number" id="meningitisBiofireCryptococcus" name="meningitisBiofireCryptococcus" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="meningitisBiofireNoneDetected" class="block">None Detected:</label>
+        <input type="number" id="meningitisBiofireNoneDetected" name="meningitisBiofireNoneDetected" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireAcinetobacter" class="block">Acinetobacter calcoaceticus-baumannii complex:</label>
+        <input type="number" id="bloodCultureBiofireAcinetobacter" name="bloodCultureBiofireAcinetobacter" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireBacteroidesFragilis" class="block">Bacteroides fragilis:</label>
+        <input type="number" id="bloodCultureBiofireBacteroidesFragilis" name="bloodCultureBiofireBacteroidesFragilis" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireEnterobacterales" class="block">Enterobacterales:</label>
+        <input type="number" id="bloodCultureBiofireEnterobacterales" name="bloodCultureBiofireEnterobacterales" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireEnterobacterCloacae" class="block">Enterobacter cloacae complex:</label>
+        <input type="number" id="bloodCultureBiofireEnterobacterCloacae" name="bloodCultureBiofireEnterobacterCloacae" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireEscherichiaColi" class="block">Escherichia coli:</label>
+        <input type="number" id="bloodCultureBiofireEscherichiaColi" name="bloodCultureBiofireEscherichiaColi" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireKlebsiellaAerogenes" class="block">Klebsiella aerogenes:</label>
+        <input type="number" id="bloodCultureBiofireKlebsiellaAerogenes" name="bloodCultureBiofireKlebsiellaAerogenes" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireKlebsiellaOxytoca" class="block">Klebsiella oxytoca:</label>
+        <input type="number" id="bloodCultureBiofireKlebsiellaOxytoca" name="bloodCultureBiofireKlebsiellaOxytoca" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireKlebsiellaPneumoniae" class="block">Klebsiella pneumoniae group:</label>
+        <input type="number" id="bloodCultureBiofireKlebsiellaPneumoniae" name="bloodCultureBiofireKlebsiellaPneumoniae" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireProteus" class="block">Proteus spp.:</label>
+        <input type="number" id="bloodCultureBiofireProteus" name="bloodCultureBiofireProteus" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireSalmonella" class="block">Salmonella spp.:</label>
+        <input type="number" id="bloodCultureBiofireSalmonella" name="bloodCultureBiofireSalmonella" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireSerratiaMarcescens" class="block">Serratia marcescens:</label>
+        <input type="number" id="bloodCultureBiofireSerratiaMarcescens" name="bloodCultureBiofireSerratiaMarcescens" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireHaemophilusInfluenzae" class="block">Haemophilus influenzae:</label>
+        <input type="number" id="bloodCultureBiofireHaemophilusInfluenzae" name="bloodCultureBiofireHaemophilusInfluenzae" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireNeisseriaMeningitidis" class="block">Neisseria meningitidis:</label>
+        <input type="number" id="bloodCultureBiofireNeisseriaMeningitidis" name="bloodCultureBiofireNeisseriaMeningitidis" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofirePseudomonasAeruginosa" class="block">Pseudomonas aeruginosa:</label>
+        <input type="number" id="bloodCultureBiofirePseudomonasAeruginosa" name="bloodCultureBiofirePseudomonasAeruginosa" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireStenotrophomonasMaltophilia" class="block">Stenotrophomonas maltophilia:</label>
+        <input type="number" id="bloodCultureBiofireStenotrophomonasMaltophilia" name="bloodCultureBiofireStenotrophomonasMaltophilia" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireCandidaAlbicans" class="block">Candida albicans:</label>
+        <input type="number" id="bloodCultureBiofireCandidaAlbicans" name="bloodCultureBiofireCandidaAlbicans" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireCandidaAuris" class="block">Candida auris:</label>
+        <input type="number" id="bloodCultureBiofireCandidaAuris" name="bloodCultureBiofireCandidaAuris" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireCandidaGlabrata" class="block">Candida glabrata:</label>
+        <input type="number" id="bloodCultureBiofireCandidaGlabrata" name="bloodCultureBiofireCandidaGlabrata" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireCandidaKrusei" class="block">Candida krusei:</label>
+        <input type="number" id="bloodCultureBiofireCandidaKrusei" name="bloodCultureBiofireCandidaKrusei" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireCandidaParapsilosis" class="block">Candida parapsilosis:</label>
+        <input type="number" id="bloodCultureBiofireCandidaParapsilosis" name="bloodCultureBiofireCandidaParapsilosis" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireCandidaTropicalis" class="block">Candida tropicalis:</label>
+        <input type="number" id="bloodCultureBiofireCandidaTropicalis" name="bloodCultureBiofireCandidaTropicalis" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireCryptococcus" class="block">Cryptococcus (C. neoformans/C. gattii):</label>
+        <input type="number" id="bloodCultureBiofireCryptococcus" name="bloodCultureBiofireCryptococcus" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireEnterococcusFaecalis" class="block">Enterococcus faecalis:</label>
+        <input type="number" id="bloodCultureBiofireEnterococcusFaecalis" name="bloodCultureBiofireEnterococcusFaecalis" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireEnterococcusFaecium" class="block">Enterococcus faecium:</label>
+        <input type="number" id="bloodCultureBiofireEnterococcusFaecium" name="bloodCultureBiofireEnterococcusFaecium" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireListeriaMonocytogenes" class="block">Listeria monocytogenes:</label>
+        <input type="number" id="bloodCultureBiofireListeriaMonocytogenes" name="bloodCultureBiofireListeriaMonocytogenes" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireStaphylococcus" class="block">Staphylococcus spp.:</label>
+        <input type="number" id="bloodCultureBiofireStaphylococcus" name="bloodCultureBiofireStaphylococcus" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireStaphylococcusAureus" class="block">Staphylococcus aureus:</label>
+        <input type="number" id="bloodCultureBiofireStaphylococcusAureus" name="bloodCultureBiofireStaphylococcusAureus" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireStaphylococcusEpidermidis" class="block">Staphylococcus epidermidis:</label>
+        <input type="number" id="bloodCultureBiofireStaphylococcusEpidermidis" name="bloodCultureBiofireStaphylococcusEpidermidis" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireStaphylococcusLugdunensis" class="block">Staphylococcus lugdunensis:</label>
+        <input type="number" id="bloodCultureBiofireStaphylococcusLugdunensis" name="bloodCultureBiofireStaphylococcusLugdunensis" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireStreptococcus" class="block">Streptococcus spp.:</label>
+        <input type="number" id="bloodCultureBiofireStreptococcus" name="bloodCultureBiofireStreptococcus" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireStreptococcusAgalactiae" class="block">Streptococcus agalactiae:</label>
+        <input type="number" id="bloodCultureBiofireStreptococcusAgalactiae" name="bloodCultureBiofireStreptococcusAgalactiae" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireStreptococcusPneumoniae" class="block">Streptococcus pneumoniae:</label>
+        <input type="number" id="bloodCultureBiofireStreptococcusPneumoniae" name="bloodCultureBiofireStreptococcusPneumoniae" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireStreptococcusPyogenes" class="block">Streptococcus pyogenes:</label>
+        <input type="number" id="bloodCultureBiofireStreptococcusPyogenes" name="bloodCultureBiofireStreptococcusPyogenes" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireCarbapenemasesIMP" class="block">Carbapenemases IMP:</label>
+        <input type="number" id="bloodCultureBiofireCarbapenemasesIMP" name="bloodCultureBiofireCarbapenemasesIMP" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireCarbapenemasesKPC" class="block">Carbapenemases KPC:</label>
+        <input type="number" id="bloodCultureBiofireCarbapenemasesKPC" name="bloodCultureBiofireCarbapenemasesKPC" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireCarbapenemasesOXA48Like" class="block">Carbapenemases OXA-48-like:</label>
+        <input type="number" id="bloodCultureBiofireCarbapenemasesOXA48Like" name="bloodCultureBiofireCarbapenemasesOXA48Like" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireCarbapenemasesNDM" class="block">Carbapenemases NDM:</label>
+        <input type="number" id="bloodCultureBiofireCarbapenemasesNDM" name="bloodCultureBiofireCarbapenemasesNDM" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireCarbapenemasesVIM" class="block">Carbapenemases VIM:</label>
+        <input type="number" id="bloodCultureBiofireCarbapenemasesVIM" name="bloodCultureBiofireCarbapenemasesVIM" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireColistinResistanceMCR1" class="block">Colistin Resistance mcr-1:</label>
+        <input type="number" id="bloodCultureBiofireColistinResistanceMCR1" name="bloodCultureBiofireColistinResistanceMCR1" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireESBLCTXM" class="block">ESBL CTX-M:</label>
+        <input type="number" id="bloodCultureBiofireESBLCTXM" name="bloodCultureBiofireESBLCTXM" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireMethicillinResistanceMECA_C" class="block">Methicillin Resistance mecA/C:</label>
+        <input type="number" id="bloodCultureBiofireMethicillinResistanceMECA_C" name="bloodCultureBiofireMethicillinResistanceMECA_C" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireMethicillinResistanceMECA_C_MREJ" class="block">Methicillin Resistance mecA/C and MREJ (MRSA):</label>
+        <input type="number" id="bloodCultureBiofireMethicillinResistanceMECA_C_MREJ" name="bloodCultureBiofireMethicillinResistanceMECA_C_MREJ" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireVancomycinResistanceVAN_A_B" class="block">Vancomycin Resistance vanA/B:</label>
+        <input type="number" id="bloodCultureBiofireVancomycinResistanceVAN_A_B" name="bloodCultureBiofireVancomycinResistanceVAN_A_B" class="border p-2 w-full">
+      </div>
+      <div class="mb-2">
+        <label for="bloodCultureBiofireNoneDetected" class="block">None Detected:</label>
+        <input type="number" id="bloodCultureBiofireNoneDetected" name="bloodCultureBiofireNoneDetected" class="border p-2 w-full">
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+    </form>
+    <canvas id="chartInfluenza"></canvas>
+    <canvas id="chartBiofireGI"></canvas>
+    <canvas id="chartBiofireRespiratory"></canvas>
+    <canvas id="chartBiofireMeningitis"></canvas>
+    <canvas id="chartBiofireBloodCulture"></canvas>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const testDataElement = document.getElementById('testData');
+      const testForm = document.getElementById('testForm');
+      const positivityRateForm = document.getElementById('positivityRateForm');
+
+      // Fetch and display test data
+      function fetchTestData() {
+        fetch('/tests')
+          .then(response => response.json())
+          .then(data => {
+            testDataElement.innerHTML = '<table class="min-w-full bg-white"><thead><tr><th class="py-2">Patient ID</th><th class="py-2">Test Type</th><th class="py-2">Sample Date</th><th class="py-2">Result</th><th class="py-2">Comments</th><th class="py-2">Actions</th></tr></thead><tbody>';
+            data.forEach(test => {
+              testDataElement.innerHTML += `<tr><td class="border px-4 py-2">${test.patientId}</td><td class="border px-4 py-2">${test.testType}</td><td class="border px-4 py-2">${new Date(test.sampleDate).toLocaleDateString()}</td><td class="border px-4 py-2">${test.result}</td><td class="border px-4 py-2">${test.comments}</td><td class="border px-4 py-2"><button onclick="deleteTest('${test._id}')" class="bg-red-500 text-white px-2 py-1 rounded">Delete</button></td></tr>`;
+            });
+            testDataElement.innerHTML += '</tbody></table>';
+          });
+      }
+
+      // Handle form submission
+      testForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(testForm);
+        const data = Object.fromEntries(formData.entries());
+
+        fetch('/tests', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }).then(response => response.json())
+          .then(() => {
+            testForm.reset();
+            fetchTestData();
+          });
+      });
+
+      positivityRateForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(positivityRateForm);
+        const data = Object.fromEntries(formData.entries());
+
+        fetch('/positivity-rates', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }).then(response => response.json())
+          .then(() => {
+            positivityRateForm.reset();
+            fetchPositivityRates();
+          });
+      });
+
+      function fetchPositivityRates() {
+        fetch('/positivity-rates')
+          .then(response => response.json())
+          .then(data => {
+            const months = data.map(rate => `${rate.month} ${rate.year}`);
+            const influenzaAData = data.map(rate => rate.influenzaA);
+            const influenzaBData = data.map(rate => rate.influenzaB);
+            const strepAData = data.map(rate => rate.strepA);
+            const covidData = data.map(rate => rate.covid);
+
+            const respiratoryBiofireData = {
+              adenovirus: data.map(rate => rate.respiratoryBiofire.adenovirus),
+              coronavirus229E: data.map(rate => rate.respiratoryBiofire.coronavirus229E),
+              // Add remaining fields for respiratory biofire data
+              noneDetected: data.map(rate => rate.respiratoryBiofire.noneDetected),
+            };
+
+            const giBiofireData = {
+              adenovirusF4041: data.map(rate => rate.giBiofire.adenovirusF4041),
+              // Add remaining fields for GI biofire data
+              noneDetected: data.map(rate => rate.giBiofire.noneDetected),
+            };
+
+            const meningitisBiofireData = {
+              escherichiaColiK1: data.map(rate => rate.meningitisBiofire.escherichiaColiK1),
+              // Add remaining fields for meningitis biofire data
+              noneDetected: data.map(rate => rate.meningitisBiofire.noneDetected),
+            };
+
+            const bloodCultureBiofireData = {
+              acinetobacter: data.map(rate => rate.bloodCultureBiofire.acinetobacter),
+              // Add remaining fields for blood culture biofire data
+              noneDetected: data.map(rate => rate.bloodCultureBiofire.noneDetected),
+            };
+
+            renderChart('chartInfluenza', 'Influenza Positivity Rates', months, [influenzaAData, influenzaBData, strepAData, covidData]);
+            renderChart('chartBiofireGI', 'GI Biofire Positivity Rates', months, [giBiofireData]);
+            renderChart('chartBiofireRespiratory', 'Respiratory Biofire Positivity Rates', months, [respiratoryBiofireData]);
+            renderChart('chartBiofireMeningitis', 'Meningitis Biofire Positivity Rates', months, [meningitisBiofireData]);
+            renderChart('chartBiofireBloodCulture', 'Blood Culture Biofire Positivity Rates', months, [bloodCultureBiofireData]);
+          });
+      }
+
+      function renderChart(canvasId, chartTitle, labels, datasets) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: datasets.map((data, index) => ({
+              label: Object.keys(data)[index],
+              data: Object.values(data)[index],
+              backgroundColor: `rgba(${index * 50}, 99, 132, 0.2)`,
+              borderColor: `rgba(${index * 50}, 99, 132, 1)`,
+              borderWidth: 1
+            }))
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            },
+            title: {
+              display: true,
+              text: chartTitle
+            }
+          }
+        });
+      }
+
+      // Initial fetch of test data and positivity rates
+      fetchTestData();
+      fetchPositivityRates();
+    });
+  </script>
+</body>
+</html>
